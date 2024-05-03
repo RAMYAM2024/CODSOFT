@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Take a Quiz or Make a Quiz</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color:pink;
+  color: #333;
+  background-image: url("https://media.istockphoto.com/id/1322300918/vector/color-sky-with-clouds-during-sunset.jpg?s=612x612&w=0&k=20&c=JOBAYd9ExmzJF94ue6hVknKq_R4hUacOICbHXfwqyJo=");
+  background-repeat: repeat-50;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  animation: fadeIn 1s ease;
+}
+
+h1, h2 {
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #FFC204;
+  animation: bounce 1s ease;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background-color: black;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
+}
+
+a:hover {
+  background-color: #45a049;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: #39FF14;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #29C5F6;
+}
+
+/* Header */
+
+header {
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  animation: fadeIn 1s ease;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  animation: bounce 1s ease;
+}
+
+.options {
+  margin-top: 10px;
+  animation: bounce 1s ease;
+}
+
+/* Quiz Form */
+
+#quiz-form {
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #000000;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  background-color: #f0f0f0;
+}
+
+/* Quiz Section */
+
+#question-container {
+  display: none;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease;
+}
+
+#question-container .question-text {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #4CAF50;
+}
+
+#question-container #options {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+#question-container #options li {
+  margin-bottom: 5px;
+}
+
+/* Result Section */
+
+#result-container {
+  display: none;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease;
+}
+
+#result-container .score-text {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #4CAF50;
+}
+
+#result-container #correct-answers {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+/* Quiz Listing */
+
+#quiz-list {
+  list-style-type: none;
+  margin-bottom: 20}
+</style>
+</head>
+<body>
+<header>
+  <h1 class="title">Welcome to Take a Quiz or Make a Quiz!</h1>
+ 
+  <div class="options">
+    <a href="create-quiz.html" class="btn-primary">Create a Quiz</a>
+    <a href="quiz-listing.html" class="quiz-link btn-primary">Take a Quiz</a>
+  </div>
+</header>
+
+<div class="container">
+  <h1 class="section-title">Create a Quiz</h1>
+  <form id="quiz-form">
+    <label for="question">Question:</label>
+    <input type="text" id="question" required>
+    <label for="option1">Option 1:</label>
+    <input type="text" id="option1" required>
+    <label for="option2">Option 2:</label>
+    <input type="text" id="option2" required>
+    <label for="option3">Option 3:</label>
+    <input type="text" id="option3" required>
+    <label for="option4">Option 4:</label>
+    <input type="text" id="option4" required>
+    <label for="option5">Option 5:</label>
+    <input type="text" id="option5" required>
+    <label for="option6">Option 6:</label>
+    <input type="text" id="option6" required>
+    <label for="correct-answer">Correct Answer:</label>
+    <select id="correct-answer" required>
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+      <option value="option3">Option 3</option>
+      <option value="option4">Option 4</option>
+      <option value="option5">Option 5</option>
+      <option value="option6">Option 6</option>
+    </select>
+    <button type="submit" class="btn-primary">Add Question</button>
+  </form>
+
+  <h1 class="section-title">Quiz</h1>
+  <div id="question-container">
+    <h2 class="question-text" id="question"></h2>
+    <ul id="options">
+      <li><input type="radio" name="answer" value="option1"> <span id="option1"></span></li>
+      <li><input type="radio" name="answer" value="option2"> <span id="option2"></span></li>
+      <li><input type="radio" name="answer" value="option3"> <span id="option3"></span></li>
+      <li><input type="radio" name="answer" value="option4"> <span id="option4"></span></li>
+      <li><input type="radio" name="answer" value="option5"> <span id="option5"></span></li>
+      <li><input type="radio" name="answer" value="option6"> <span id="option6"></span></li>
+    </ul>
+    <button id="next-btn" class="btn-primary">Next</button>
+  </div>
+  <div id="result-container">
+    <h2 class="score-text" id="score"></h2>
+    <ul id="correct-answers"></ul>
+  </div>
+
+  <h1 class="section-title">Quiz Results</h1>
+  <h2 class="score-text" id="score"></h2>
+  <ul id="correct-answers"></ul>
+
+  <h1 class="section-title">Quiz Listing</h1>
+  <ul id="quiz-list"></ul>
+</div>
+
+<script src="quiz.js"></script>
+<script>
+  const quizLink = document.querySelector('.quiz-link');
+  
+  quizLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    alert('Quiz feature is currently under development. Please try again later!');
+    quizLink.style.animation = 'shake 0.6s ease';
+    setTimeout(() => {
+      quizLink.style.animation = '';
+    }, 600);
+  });
+</script>
+</body>
+</html>
