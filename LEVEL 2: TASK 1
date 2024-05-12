@@ -1,0 +1,132 @@
+// server.js
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+dotenv.config();
+
+// Connect to MongoDB database
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('Failed to connect to MongoDB:', error);
+  });
+
+// Define API routes here
+
+// React components
+const React = require('react');
+const { useState, useEffect } = require('react');
+const ReactDOMServer = require('react-dom/server');
+
+const Home = () => {
+  return (
+    <div>
+      <h1>Welcome to the Job Board!</h1>
+      {/* Add featured job listings */}
+    </div>
+  );
+};
+
+const JobListings = () => {
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    // Fetch job listings from API and update state
+    setJobs([
+      { id: 1, title: 'Job Title 1', description: 'Job Description 1' },
+      { id: 2, title: 'Job Title 2', description: 'Job Description 2' },
+      { id: 3, title: 'Job Title 3', description: 'Job Description 3' },
+    ]);
+  }, []);
+
+  return (
+    <div>
+      <h2>Job Listings</h2>
+      {jobs.map((job) => (
+        <div key={job.id}>
+          <h3>{job.title}</h3>
+          <p>{job.description}</p>
+          {/* Add more job details */}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const JobDetail = ({ jobId }) => {
+  // Fetch job details for the specified jobId from the API
+  const job = {
+    id: 1,
+    title: 'Job Title',
+    description: 'Job Description',
+    salary: '$100,000',
+  };
+
+  return (
+    <div>
+      <h2>Job Detail</h2>
+      <h3>{job.title}</h3>
+      <p>{job.description}</p>
+      <p>Salary: {job.salary}</p>
+      {/* Display more job details */}
+    </div>
+  );
+};
+
+const EmployerDashboard = () => {
+  // Implement employer account management and job posting functionality
+
+  return (
+    <div>
+      <h2>Employer Dashboard</h2>
+      {/* Add account and job posting features */}
+    </div>
+  );
+};
+
+const CandidateDashboard = () => {
+  // Implement candidate profile management and job application functionality
+
+  return (
+    <div>
+      <h2>Candidate Dashboard</h2>
+      {/* Add profile and job application features */}
+    </div>
+  );
+};
+
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+// Render React components to HTML
+app.get('/', (req, res) => {
+  const homeHTML = ReactDOMServer.renderToString(<Home />);
+  res.send(`
+    <html>
+      <head>
+        <title>Job Board</title>
+        <style>
+          /* Add your custom styles here */
+        </style>
+      </head>
+      <body>
+        <div id="root">${homeHTML}</div>
+        <script src="/client.js"></script>
+      </body>
+    </html>
+  `);
+});
